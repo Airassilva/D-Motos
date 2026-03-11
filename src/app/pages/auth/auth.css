@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+/* ── Variáveis ── */
+:root {
+  --laranja:       #FF6A00;
+  --laranja-escuro:#D45500;
+  --laranja-claro: #FF8C3A;
+  --laranja-bg:    #FFF4EC;
+  --branco:        #FFFFFF;
+  --cinza-claro:   #F5F5F5;
+  --cinza-medio:   #E0E0E0;
+  --cinza-texto:   #888;
+  --preto-suave:   #1A1A1A;
+  --erro:          #E53935;
+  --sombra:        0 8px 40px rgba(255, 106, 0, 0.12);
+  --sombra-hover:  0 16px 48px rgba(255, 106, 0, 0.22);
+  --radius:        16px;
+}
+
+/* ── Reset base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f9f9f9;
+  font-weight: 700;
+}
+
+/* ── Wrapper geral ── */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 40px 24px;
+  background:
+    radial-gradient(ellipse at 10% 50%, rgba(255, 106, 0, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 90% 20%, rgba(255, 106, 0, 0.04) 0%, transparent 50%),
+    #fafafa;
+}
+
+/* ── Decoração lateral com a moto ── */
+.moto-deco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: fadeSlideLeft 0.8s ease both;
+}
+
+.moto-svg {
+  width: 320px;
+  opacity: 0.85;
+  filter: drop-shadow(0 4px 24px rgba(255,106,0,0.25));
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.moto-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--laranja);
+  text-shadow: 2px 2px 0 rgba(255,106,0,0.15);
+}
+
+/* ── Card de login ── */
+.auth-container {
+  background: var(--branco);
+  border-radius: var(--radius);
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--sombra);
+  border-top: 4px solid var(--laranja);
+  animation: fadeSlideRight 0.8s ease both;
+  position: relative;
+}
+
+/* Detalhe — canto superior direito */
+.auth-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 130px;
+  height: 130px;
+  border-radius: 0 var(--radius) 0 100%;
+  background: radial-gradient(circle at top right, rgba(255,106,0,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Detalhe — canto inferior esquerdo */
+.auth-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 160px;
+  height: 160px;
+  border-radius: 0 0 0 var(--radius);
+  background: radial-gradient(circle at bottom left, rgba(255,106,0,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Header do card ── */
+.auth-header {
+  text-align: center;
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.logo-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+  animation: bounce 1s ease 0.5s both;
+}
+
+@keyframes bounce {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+.auth-header h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--preto-suave);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.subtitulo {
+  font-size: 0.9rem;
+  color: var(--cinza-texto);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* ── Formulário ── */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--preto-suave);
+}
+
+/* ── Inputs com ícone ── */
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  border: 2px solid var(--cinza-medio);
+  border-radius: 10px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.95rem;
+  color: var(--preto-suave);
+  background: var(--cinza-claro);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+}
+
+.input-wrapper input::placeholder {
+  color: #bbb;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--laranja);
+  background: var(--branco);
+  box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.1);
+}
+
+.input-wrapper input.input-erro {
+  border-color: var(--erro);
+  background: #fff5f5;
+}
+
+/* ── Mensagens de erro de campo ── */
+.msg-erro {
+  font-size: 0.78rem;
+  color: var(--erro);
+  font-weight: 500;
+  padding-left: 4px;
+}
+
+/* ── Erro de login geral ── */
+.erro-login {
+  background: #fff0f0;
+  border: 1px solid #ffcdd2;
+  border-left: 4px solid var(--erro);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  color: var(--erro);
+  font-weight: 500;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-6px); }
+  75%       { transform: translateX(6px); }
+}
+
+/* ── Botão ── */
+.btn-entrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px;
+  margin-top: 4px;
+  background: linear-gradient(135deg, var(--laranja) 0%, var(--laranja-escuro) 100%);
+  color: var(--branco);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: 0 4px 16px rgba(255, 106, 0, 0.35);
+}
+
+.btn-entrar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 106, 0, 0.45);
+}
+
+.btn-entrar:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 106, 0, 0.3);
+}
+
+.btn-entrar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+
+.btn-entrar:hover:not(:disabled) .btn-icon {
+  transform: translateX(4px);
+}
+
+/* ── Animações de entrada ── */
+@keyframes fadeSlideLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeSlideRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Responsivo ── */
+@media (max-width: 768px) {
+  .auth-wrapper {
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px 16px;
+  }
+
+  .moto-deco {
+    order: -1;
+  }
+
+  .moto-svg {
+    width: 220px;
+  }
+
+  .moto-label {
+    font-size: 2rem;
+  }
+
+  .auth-container {
+    padding: 36px 24px;
+  }
+}

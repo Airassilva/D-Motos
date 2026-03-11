@@ -1,18 +1,58 @@
-<body>
+<div class="auth-wrapper">
+
   <div class="auth-container">
-    <h2>Login</h2>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <label for="email">Email: </label>
-      <input id="email" type="email" formControlName="email">
 
-      <label for="senha">Senha: </label>
-      <input id="senha" type="password" formControlName="senha">
+    <div class="auth-header">
+      <div class="logo-icon">🏍️</div>
+      <h2>D Motos</h2>
+      <p class="subtitulo">Acesse sua conta</p>
+    </div>
 
-      <button type="submit">Entrar</button>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+
+      <div class="field-group">
+        <label for="email">Email</label>
+        <div class="input-wrapper">
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="seu@email.com"
+            [class.input-erro]="form.get('email')?.invalid && form.get('email')?.touched"
+          >
+        </div>
+        <span class="msg-erro" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+          Informe um e-mail válido.
+        </span>
+      </div>
+
+      <div class="field-group">
+        <label for="senha">Senha</label>
+        <div class="input-wrapper">
+          <input
+            id="senha"
+            type="password"
+            formControlName="senha"
+            placeholder="Mínimo 8 caracteres"
+            [class.input-erro]="form.get('senha')?.invalid && form.get('senha')?.touched"
+          >
+        </div>
+        <span class="msg-erro" *ngIf="form.get('senha')?.invalid && form.get('senha')?.touched">
+          Senha deve ter no mínimo 8 caracteres.
+        </span>
+      </div>
+
+      <div *ngIf="erroLogin" class="erro-login">
+        ⚠️ {{ erroLogin }}
+      </div>
+
+      <button type="submit" class="btn-entrar" [disabled]="form.invalid">
+        <span>Entrar</span>
+        <span class="btn-icon">→</span>
+      </button>
+
     </form>
+
   </div>
 
-  <div *ngIf="erroLogin" class="erro-login">
-    {{ erroLogin }}
-  [</div>
-</body>
+</div>
